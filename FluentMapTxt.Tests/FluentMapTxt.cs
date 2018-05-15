@@ -13,18 +13,6 @@ namespace FluentMapTxt.Tests
 		const string fileName = "text.txt";
 
 		[TestMethod]
-		public void ConsigoCriarUmaPastaEOArquivo()
-		{
-			//var map = new Mapper(folderPath, fileName);
-
-			//map.WriteLine();
-
-			//var path = Path.Combine(folderPath, fileName);
-			//Assert.IsTrue(Directory.Exists(folderPath) && File.Exists(path));
-			//Directory.Delete(folderPath, true);
-		}
-
-		[TestMethod]
 		public void ArquivoComMapeamentoCorreto()
 		{
 			FluentMapper.Initialize(folderPath, fileName, c =>

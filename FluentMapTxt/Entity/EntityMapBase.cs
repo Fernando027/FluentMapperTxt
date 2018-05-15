@@ -1,4 +1,5 @@
 ﻿using FluentMapTxt;
+using FluentMapTxt.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,7 +54,7 @@ public abstract class EntityMapBase<TEntity, TPropertyMap> : IEntityMap<TEntity>
 	{
 		if (PropertyMaps.Any(p => p.PropertyInfo.Name == map.PropertyInfo.Name))
 		{
-			throw new Exception($"Duplicate mapping detected. Property '{map.PropertyInfo.Name}' is already mapped.");
+			throw new DuplicateMappingException(map);
 		}
 	}
 }

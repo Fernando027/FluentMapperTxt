@@ -11,7 +11,7 @@ namespace FluentMapTxt
 	public static class FluentMapper
 	{
 		private static readonly MapConfiguration _configuration = new MapConfiguration();
-		public static readonly ConcurrentDictionary<Type, IEntityMap> EntityMaps = new ConcurrentDictionary<Type, IEntityMap>();
+		private static readonly ConcurrentDictionary<Type, IEntityMap> EntityMaps = new ConcurrentDictionary<Type, IEntityMap>();
 		private static string _fullPath;
 
 		public static void Initialize(string folderPath, string fileName, Action<MapConfiguration> configure)
@@ -27,7 +27,6 @@ namespace FluentMapTxt
 
 		public static void Write<TEntity>(TEntity entity) where TEntity : class
 		{
-			Type type = typeof(TEntity);
 			var lines = new List<string>();
 
 			if (EntityMaps.ContainsKey(typeof(TEntity)))
@@ -35,32 +34,7 @@ namespace FluentMapTxt
 				lines.Concat(WriteLines(entity, lines));
 			}
 
-
 			System.IO.File.WriteAllLines(_fullPath, lines, Encoding.ASCII);
-
-			//foreach (var prop in type.GetProperties())
-			//{
-			//	if (prop is IList && prop.GetType().IsGenericType)
-			//	{
-			//		var collection = (IEnumerable)prop.GetValue(entity, null);
-
-			//		foreach (var item in collection)
-			//		{
-			//			line = writeLine(item, line);
-			//		}
-			//	}
-			//	else
-			//	{
-			//		if (EntityMaps.ContainsKey(typeof(TEntity)))
-			//		{
-			//			line = writeLine(entity, line);
-			//		}
-			//		else
-			//		{
-			//			line = writeLine(prop.GetValue(entity), line);
-			//		}
-			//	}
-			//}
 		}
 
 		private static IList<string> WriteLines<TEntity>(TEntity entity, IList<string> lines) where TEntity : class
@@ -79,7 +53,9 @@ namespace FluentMapTxt
 					string text = string.Empty;
 
 					if (value != null)
+					{
 						text = value.ToString();
+					}
 
 					line = InsertInLine(line, text, item.Position, item.Length);
 				}
