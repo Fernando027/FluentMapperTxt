@@ -27,7 +27,7 @@ namespace FluentMapTxt
 		/// </summary>
 		/// <param name="info">The <see cref="T:System.Reflection.PropertyInfo"/> object representing to the property to map.</param>
 		/// <param name="columnName">The column name in the database to map the property to.</param>
-		internal PropertyMapBase(PropertyInfo info, int position)
+		public PropertyMapBase(PropertyInfo info, int position)
 		{
 			PropertyInfo = info;
 			Position = position;
@@ -41,7 +41,7 @@ namespace FluentMapTxt
 		/// <param name="info">The <see cref="T:System.Reflection.PropertyInfo"/> object representing to the property to map.</param>
 		/// <param name="columnName">The column name in the database to map the property to.</param>
 		/// <param name="caseSensitive">A value indicating whether the mappig should be case sensitive.</param>
-		internal PropertyMapBase(PropertyInfo info, int position, int length)
+		public PropertyMapBase(PropertyInfo info, int position, int length)
 		{
 			PropertyInfo = info;
 			Length = length;
