@@ -25,7 +25,7 @@ public abstract class EntityMapBase<TEntity, TPropertyMap> : IEntityMap<TEntity>
 	/// <summary>
 	/// Gets the collection of mapped properties.
 	/// </summary>
-	public IList<IPropertyMap> PropertyMaps { get; }
+	public IList<IPropertyMap> PropertyMaps { get; set; }
 
 	/// <summary>
 	/// Returns an instance of <typeparamref name="TPropertyMap"/> which can perform custom mapping
@@ -34,7 +34,7 @@ public abstract class EntityMapBase<TEntity, TPropertyMap> : IEntityMap<TEntity>
 	/// <param name="expression">Expression to the property on <typeparamref name="TEntity"/>.</param>
 	/// <returns>The created <see cref="T:Dapper.FluentMap.Mapping.PropertyMap"/> instance. This enables a fluent API.</returns>
 	/// <exception cref="T:System.Exception">when a duplicate mapping is provided.</exception>
-	protected TPropertyMap Map(Expression<Func<TEntity, object>> expression)
+	public TPropertyMap Map(Expression<Func<TEntity, object>> expression)
 	{
 		var info = (PropertyInfo)ReflectionHelper.GetMemberInfo(expression);
 		var propertyMap = GetPropertyMap(info);
@@ -48,7 +48,7 @@ public abstract class EntityMapBase<TEntity, TPropertyMap> : IEntityMap<TEntity>
 	/// </summary>
 	/// <param name="info">The <see cref="PropertyInfo"/> for the property.</param>
 	/// <returns>An instance of <typeparamref name="TPropertyMap"/>.</returns>
-	protected abstract TPropertyMap GetPropertyMap(PropertyInfo info);
+	public abstract TPropertyMap GetPropertyMap(PropertyInfo info);
 
 	private void ThrowIfDuplicateMapping(IPropertyMap map)
 	{

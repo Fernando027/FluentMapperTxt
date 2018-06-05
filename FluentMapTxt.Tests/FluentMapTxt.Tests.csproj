@@ -55,6 +55,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CNAB240.BB\CNAB240.BB.csproj">
+      <Project>{5229A84E-CD4E-4326-91B2-34A5F80DC77F}</Project>
+      <Name>CNAB240.BB</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FluentMapTxt\FluentMapTxt.csproj">
       <Project>{2a0f45fc-98d4-404f-a183-e1477ef3ed5c}</Project>
       <Name>FluentMapTxt</Name>

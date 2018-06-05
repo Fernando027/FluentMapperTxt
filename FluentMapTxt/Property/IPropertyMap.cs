@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using CNAB240.BB.Model;
+using System.Reflection;
 
 namespace FluentMapTxt
 {
@@ -15,12 +16,12 @@ namespace FluentMapTxt
 		/// <summary>
 		/// Gets a value indicating wether the property should be ignored when mapping.
 		/// </summary>
-		bool Ignored { get; }
+		int Ordem { get; set; }
 
-		int Position { get; }
-
-		int Length { get; }
-		
-		int PositionSort { get; }
+		int Digitos { get; set; }
+		Formato Formato { get; set; }
+		string Instrucao { get; set; }
+		bool Brancos { get; set; }
+		string[] Escolha { get; set; }
 	}
 }

@@ -11,7 +11,7 @@ namespace FluentMapTxt
 	public static class FluentMapper
 	{
 		private static readonly MapConfiguration _configuration = new MapConfiguration();
-		private static readonly ConcurrentDictionary<Type, IEntityMap> EntityMaps = new ConcurrentDictionary<Type, IEntityMap>();
+		public static ConcurrentDictionary<Type, IEntityMap> EntityMaps = new ConcurrentDictionary<Type, IEntityMap>();
 		private static string _fullPath;
 
 		public static void Initialize(string folderPath, string fileName, Action<MapConfiguration> configure)
@@ -23,7 +23,6 @@ namespace FluentMapTxt
 
 			_fullPath = Path.Combine(folderPath, fileName);
 		}
-
 
 		public static void Write<TEntity>(TEntity entity) where TEntity : class
 		{
@@ -40,7 +39,7 @@ namespace FluentMapTxt
 		private static IList<string> WriteLines<TEntity>(TEntity entity, IList<string> lines) where TEntity : class
 		{
 			var line = string.Empty.PadLeft(100, ' ');
-			var properties = EntityMaps[entity.GetType()].PropertyMaps.OrderBy(x => x.PositionSort).ToList();
+			var properties = EntityMaps[entity.GetType()].PropertyMaps.ToList();
 
 			foreach (var item in properties)
 			{
@@ -57,7 +56,7 @@ namespace FluentMapTxt
 						text = value.ToString();
 					}
 
-					line = InsertInLine(line, text, item.Position, item.Length);
+					line = InsertInLine(line, text, item.Digitos);
 				}
 			}
 
@@ -90,16 +89,14 @@ namespace FluentMapTxt
 			return lines;
 		}
 
-		private static string InsertInLine(string line, string text, int position, int length)
+		private static string InsertInLine(string line, string text, int length)
 		{
-			if (position + length > line.Length)
+			if (length > line.Length)
 				throw new Exception("O Texto não cabe na linha.");
 
 			var textToInsert = text.PadLeft(length, ' ');
-			line = line.Insert(position, textToInsert);
+			line = line.Insert(line.Length, textToInsert);
 			return line;
 		}
 	}
 }
-
-

@@ -7,11 +7,11 @@ using System.Reflection;
 /// Represents a typed mapping of an entity.
 /// </summary>
 /// <typeparam name="TEntity">The type of the entity to configure the mapping for.</typeparam>
-public abstract class EntityMap<TEntity> : EntityMapBase<TEntity, PropertyMap>
+public class EntityMap<TEntity> : EntityMapBase<TEntity, PropertyMap>
 	where TEntity : class
 {
 	/// <inheritdoc />
-	protected override PropertyMap GetPropertyMap(PropertyInfo info)
+	public override PropertyMap GetPropertyMap(PropertyInfo info)
 	{
 		return new PropertyMap(info);
 	}

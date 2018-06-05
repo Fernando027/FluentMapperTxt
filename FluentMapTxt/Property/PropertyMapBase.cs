@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CNAB240.BB.Model;
+using System;
 using System.ComponentModel;
 using System.Reflection;
 
@@ -20,82 +21,56 @@ namespace FluentMapTxt
 			PropertyInfo = info;
 		}
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:Dapper.FluentMap.Mapping.PropertyMap"/> using
-		/// the specified <see cref="T:System.Reflection.PropertyInfo"/> object representing the property to map
-		/// and column name to map the property to.
-		/// </summary>
-		/// <param name="info">The <see cref="T:System.Reflection.PropertyInfo"/> object representing to the property to map.</param>
-		/// <param name="columnName">The column name in the database to map the property to.</param>
-		public PropertyMapBase(PropertyInfo info, int position)
-		{
-			PropertyInfo = info;
-			Position = position;
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:Dapper.FluentMap.Mapping.PropertyMap"/> using
-		/// the specified <see cref="T:System.Reflection.PropertyInfo"/> object representing the property to map,
-		/// column name to map the property to and a value indicating whether the mapping should be case sensitive.
-		/// </summary>
-		/// <param name="info">The <see cref="T:System.Reflection.PropertyInfo"/> object representing to the property to map.</param>
-		/// <param name="columnName">The column name in the database to map the property to.</param>
-		/// <param name="caseSensitive">A value indicating whether the mappig should be case sensitive.</param>
-		public PropertyMapBase(PropertyInfo info, int position, int length)
-		{
-			PropertyInfo = info;
-			Length = length;
-			Position = position;
-		}
-
-		/// <summary>
-		/// Gets a value indicating the property should be ignored when mapping.
-		/// </summary>
-		public bool Ignored { get; private set; }
-
-		public int Position { get; private set; }
-
-		public int PositionSort { get; private set; }
-
-		public int Length { get; private set; }
+		public int Ordem { get; set; }
+		public int Digitos { get; set; }
+		public Formato Formato { get; set; }
+		public string Instrucao { get; set; }
+		public bool Brancos { get; set; }
+		public string[] Escolha { get; set; }
 
 		/// <summary>
 		/// Gets a reference to the <see cref="System.Reflection.PropertyInfo"/> of this mapping.
 		/// </summary>
 		public PropertyInfo PropertyInfo { get; }
 
-		public TPropertyMap PositionStart(int position)
+		public TPropertyMap NaOrdem(int ordem)
 		{
-			Position = position;
+			Ordem = ordem;
 			return this as TPropertyMap;
 		}
 
-		public TPropertyMap SetPositionSort(int positionSort)
+		public TPropertyMap ComFormato(Formato formato)
 		{
-			PositionSort = positionSort;
+			Formato = formato;
 			return this as TPropertyMap;
 		}
 
-
-		public TPropertyMap LengthCharacter(int length)
+		public TPropertyMap ComInstrucao(string instrucao)
 		{
-			Length = length;
+			Instrucao = instrucao;
 			return this as TPropertyMap;
 		}
 
-
-		/// <summary>
-		/// Marks the current property as ignored, resulting in the property not being mapped by Dapper.
-		/// </summary>
-		/// <returns>The current <see cref="T:Dapper.FluentMap.Mapping.PropertyMap"/> instance. This enables a fluent API.</returns>
-		public TPropertyMap Ignore()
+		public TPropertyMap ComBrancos(bool brancos)
 		{
-			Ignored = true;
+			Brancos = brancos;
 			return this as TPropertyMap;
 		}
 
+		public TPropertyMap ComDigitos(int digitos)
+		{
+			Digitos = digitos;
+			return this as TPropertyMap;
+		}
+
+		public TPropertyMap ComEscolhas(string[] escolhas)
+		{
+			Escolha = escolhas;
+			return this as TPropertyMap;
+		}
 
 		#region EditorBrowsableStates
+
 		/// <inheritdoc />
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public override string ToString()
@@ -123,6 +98,7 @@ namespace FluentMapTxt
 		{
 			return base.GetType();
 		}
-		#endregion
+
+		#endregion EditorBrowsableStates
 	}
 }

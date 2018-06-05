@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CNAB240.BB.Model;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -55,6 +57,26 @@ namespace FluentMapTxt
 				}
 			}
 		}
+
+		public static IList<IPropertyMap> GetAttributeValue(Type objtype)
+		{
+			var lista = new List<IPropertyMap>();
+			foreach (var propertyInfo in objtype.GetProperties())
+			{
+				foreach (CampoAttribute campo in propertyInfo.GetCustomAttributes(typeof(CampoAttribute), true))
+				{
+					var property = new PropertyMap(propertyInfo);
+					property.Brancos = campo.Brancos;
+					property.Digitos = campo.Digitos;
+					property.Escolha = campo.Escolha;
+					property.Formato = campo.Formato;
+					property.Instrucao = campo.Instrucao;
+					property.Ordem = campo.Ordem;
+					lista.Add(property);
+				}
+			}
+
+			return lista;
+		}
 	}
 }
-

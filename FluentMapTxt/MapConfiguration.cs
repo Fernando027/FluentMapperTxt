@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using System.Reflection;
 
 namespace FluentMapTxt
 {
@@ -10,13 +9,21 @@ namespace FluentMapTxt
 	{
 		public void AddMap<TEntity>(IEntityMap<TEntity> mapper) where TEntity : class
 		{
-			if (!FluentMapper.EntityMaps.TryAdd(typeof(TEntity), mapper))			
+			if (!FluentMapper.EntityMaps.TryAdd(typeof(TEntity), mapper))
 			{
 				throw new InvalidOperationException($"Adding entity map for type '{typeof(TEntity)}' failed. The type already exists. Current entity maps: ");
 			}
 		}
 
+		public void AddFromDataAnnotations<TEntity>(Type type) where TEntity : class
+		{
+			EntityMap<TEntity> mapper = new EntityMap<TEntity>();
+			mapper.PropertyMaps = ReflectionHelper.GetAttributeValue(type);
+			this.AddMap<TEntity>(mapper);
+		}
+
 		#region EditorBrowsableStates
+
 		/// <inheritdoc/>
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public override string ToString()
@@ -44,7 +51,7 @@ namespace FluentMapTxt
 		{
 			return base.GetType();
 		}
-		#endregion
 
+		#endregion EditorBrowsableStates
 	}
 }
