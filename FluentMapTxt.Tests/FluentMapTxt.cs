@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using CNAB240.BB.Model;
+using FizzWare.NBuilder;
 using FluentMapTxt.Tests.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -20,16 +21,9 @@ namespace FluentMapTxt.Tests
 			 {
 				 c.AddMap(new ArquivoModeloMap());
 				 c.AddFromDataAnnotations<HeaderDoArquivo>(typeof(HeaderDoArquivo));
-				 //c.AddMap(new HeaderMap());
-				 //c.AddMap(new DetailsMap());
-				 //c.AddMap(new FooterMap());
 			 });
 
-			var arquivo = new HeaderDoArquivo
-			{
-				Arquivo_Codigo = "1",
-				Arquivo_HoradeGeraçãoDoArquivo = "2"
-			};
+			var arquivo = Builder<HeaderDoArquivo>.CreateNew().Build();
 
 			FluentMapper.Write(arquivo);
 

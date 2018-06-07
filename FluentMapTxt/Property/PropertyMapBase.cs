@@ -11,11 +11,6 @@ namespace FluentMapTxt
 	/// <typeparam name="TPropertyMap">The type of the property mapping.</typeparam>
 	public abstract class PropertyMapBase<TPropertyMap> where TPropertyMap : class, IPropertyMap
 	{
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:Dapper.FluentMap.Mapping.PropertyMap"/> using
-		/// the specified <see cref="T:System.Reflection.PropertyInfo"/> object representing the property to map.
-		/// </summary>
-		/// <param name="info">The <see cref="T:System.Reflection.PropertyInfo"/> object representing to the property to map.</param>
 		protected PropertyMapBase(PropertyInfo info)
 		{
 			PropertyInfo = info;
@@ -27,6 +22,7 @@ namespace FluentMapTxt
 		public string Instrucao { get; set; }
 		public bool Brancos { get; set; }
 		public string[] Escolha { get; set; }
+		public char PadLeftPadrao { get; set; }
 
 		/// <summary>
 		/// Gets a reference to the <see cref="System.Reflection.PropertyInfo"/> of this mapping.

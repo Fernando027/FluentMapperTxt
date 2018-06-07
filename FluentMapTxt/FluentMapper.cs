@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using CNAB240.BB.Model;
 
 namespace FluentMapTxt
 {
@@ -38,64 +39,87 @@ namespace FluentMapTxt
 
 		private static IList<string> WriteLines<TEntity>(TEntity entity, IList<string> lines) where TEntity : class
 		{
-			var line = string.Empty.PadLeft(100, ' ');
 			var properties = EntityMaps[entity.GetType()].PropertyMaps.ToList();
-
-			foreach (var item in properties)
+			var size = properties.Sum(x => x.Digitos);
+			var line = string.Empty.PadLeft(size, ' ');
+			var start = 0;
+			for (var index = 0; index < properties.Count; index++)
 			{
-				object value = item.PropertyInfo.GetValue(entity);
+				var item = properties[index];
+				var value = item.PropertyInfo.GetValue(entity);
 				if (item.PropertyInfo.PropertyType.IsPrimitive
 					|| item.PropertyInfo.PropertyType == typeof(Decimal)
 					|| item.PropertyInfo.PropertyType == typeof(DateTime)
 					|| item.PropertyInfo.PropertyType == typeof(String))
 				{
-					string text = string.Empty;
+					var text = string.Empty;
 
 					if (value != null)
 					{
 						text = value.ToString();
 					}
 
-					line = InsertInLine(line, text, item.Digitos);
+					line = InsertInLine(line, text, item, start, index);
 				}
 			}
 
 			lines.Add(line);
 
-			foreach (var item in properties)
-			{
-				object value = item.PropertyInfo.GetValue(entity);
-				if (value is IList && value.GetType().IsGenericType)
-				{
-					var collection = (IEnumerable)item.PropertyInfo.GetValue(entity, null);
+			//foreach (var item in properties)
+			//{
+			//	object value = item.PropertyInfo.GetValue(entity);
+			//	if (value is IList && value.GetType().IsGenericType)
+			//	{
+			//		var collection = (IEnumerable)item.PropertyInfo.GetValue(entity, null);
 
-					foreach (var itemCollecion in collection)
-					{
-						lines.Concat(WriteLines(itemCollecion, lines));
-					}
-				}
-				else
-				{
-					if (!item.PropertyInfo.PropertyType.IsPrimitive
-					&& item.PropertyInfo.PropertyType != typeof(Decimal)
-					&& item.PropertyInfo.PropertyType != typeof(DateTime)
-					&& item.PropertyInfo.PropertyType != typeof(String))
-					{
-						lines.Concat(WriteLines(value, lines));
-					}
-				}
-			}
+			//		foreach (var itemCollecion in collection)
+			//		{
+			//			lines.Concat(WriteLines(itemCollecion, lines));
+			//		}
+			//	}
+			//	else
+			//	{
+			//		if (!item.PropertyInfo.PropertyType.IsPrimitive
+			//		&& item.PropertyInfo.PropertyType != typeof(Decimal)
+			//		&& item.PropertyInfo.PropertyType != typeof(DateTime)
+			//		&& item.PropertyInfo.PropertyType != typeof(String))
+			//		{
+			//			lines.Concat(WriteLines(value, lines));
+			//		}
+			//	}
+			//}
 
 			return lines;
 		}
 
-		private static string InsertInLine(string line, string text, int length)
+		private static string InsertInLine(string line, string text, IPropertyMap prop, int start, int index)
 		{
-			if (length > line.Length)
+			prop.PadLeftPadrao = '0';
+			if (prop.Digitos > line.Length)
 				throw new Exception("O Texto não cabe na linha.");
 
-			var textToInsert = text.PadLeft(length, ' ');
-			line = line.Insert(line.Length, textToInsert);
+			if (prop.Brancos)
+			{
+				var blanktext = "".PadLeft(prop.Digitos, prop.PadLeftPadrao).Substring(0, prop.Digitos);
+				line = line.Insert(start, blanktext);
+			}
+			else if (!string.IsNullOrEmpty(prop.Instrucao))
+			{
+				var instrucao = prop.Instrucao.PadLeft(prop.Digitos, prop.PadLeftPadrao).Substring(0, prop.Digitos);
+				line = line.Insert(start, instrucao);
+			}
+			else if (prop.Formato == Formato.Sequencial)
+			{
+				var textToInsert = index.ToString().PadLeft(prop.Digitos, prop.PadLeftPadrao).Substring(0, prop.Digitos);
+				line = line.Insert(start, textToInsert);
+			}
+			else
+			{
+				var textToInsert = text.PadLeft(prop.Digitos, prop.PadLeftPadrao).Substring(0, prop.Digitos);
+				line = line.Insert(start, textToInsert);
+			}
+
+			start = start + prop.Digitos;
 			return line;
 		}
 	}

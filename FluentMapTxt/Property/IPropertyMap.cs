@@ -23,5 +23,6 @@ namespace FluentMapTxt
 		string Instrucao { get; set; }
 		bool Brancos { get; set; }
 		string[] Escolha { get; set; }
+		char PadLeftPadrao { get; set; }
 	}
 }
