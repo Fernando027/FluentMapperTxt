@@ -33,7 +33,7 @@ namespace FluentMapTxt.Tests
 
 		private class ArquivoModeloMap : EntityMap<ArquivoModelo>
 		{
-			public ArquivoModeloMap()
+			public ArquivoModeloMap() 
 			{
 				Map(p => p.Teste).ComDigitos(10);
 			}

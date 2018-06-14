@@ -94,7 +94,7 @@ namespace FluentMapTxt
 
 		private static string InsertInLine(string line, string text, IPropertyMap prop, int start, int index)
 		{
-			prop.PadLeftPadrao = '0';
+			prop.PadLeftPadrao = ' ';
 			if (prop.Digitos > line.Length)
 				throw new Exception("O Texto não cabe na linha.");
 
