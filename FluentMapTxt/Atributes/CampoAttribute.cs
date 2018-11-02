@@ -2,23 +2,29 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
-namespace CNAB240.BB.Model
+namespace fluentMapTxt.Model
 {
 	public class CampoAttribute : Attribute
 	{
-		public CampoAttribute(string codigo)
+		public CampoAttribute()
 		{
-			this.Codigo = codigo;
-			//var teste = this.Escolha.ToDictionary(x => x.Split(':')[0], x => x.Split(':')[1]);
 		}
 
-		private string Codigo { get; set; }
-		public int Ordem { get; set; }
-		public int Digitos { get; set; }
-		public Formato Formato { get; set; }
-		public string Instrucao { get; set; }
-		public bool Brancos { get; set; }
-		public string[] Escolha { get; set; }
-	}
+		//private string Codigo { get; set; }
+		//public int Ordem { get; set; }
+		public int QuantidadeDigitos { get; set; }
+		public char PadLeftPadrao { get; set; }
+
+        public Formato Formato { get; set; }
+        public string DateTimeMascara { get; set; }
+        public string ValorPadrao { get; set; }
+        public bool Brancos { get; set; }
+
+        //public string[] Condicional { get; set; }
+        //public string[] Escolha { get; set; }
+
+        //public List<KeyValuePair<string, string>> Teste { get; set; }
+    }
 }

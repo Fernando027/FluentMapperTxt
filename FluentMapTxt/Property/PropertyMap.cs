@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace FluentMapTxt
+namespace fluentMapTxt
 {
 	/// <summary>
 	/// Represents the mapping of a property.

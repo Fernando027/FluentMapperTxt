@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FluentMapTxt.Tests")]
+[assembly: AssemblyTitle("FluentMapTxt")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FluentMapTxt.Tests")]
+[assembly: AssemblyProduct("FluentMapTxt")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("874daed0-3c26-4329-8e78-91666dab9e11")]
+[assembly: Guid("f7de9bef-4b8e-4fef-a9ad-6c2660c17831")]
 
 // Version information for an assembly consists of the following four values:
 //

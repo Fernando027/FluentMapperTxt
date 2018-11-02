@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CNAB240.BB.Model
+namespace fluentMapTxt.Model
 {
 	public class MapperAttribute : Attribute
 	{

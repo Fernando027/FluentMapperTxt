@@ -1,11 +1,11 @@
-﻿namespace CNAB240.BB.Model
+﻿namespace fluentMapTxt.Model
 {
-	public enum Formato
-	{
-		Numerico,
-		Alfanumerico,
-		Data,
-		Hora,
-		Sequencial
-	}
+    public enum Formato
+    {
+        Numerico,
+        Alfanumerico,
+        Data,
+        Hora,
+        Sequencial
+    }
 }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
 
-namespace FluentMapTxt
+namespace fluentMapTxt
 {
 	public class MapConfiguration
 	{
-		public void AddMap<TEntity>(IEntityMap<TEntity> mapper) where TEntity : class
+		public void AddFromMap<TEntity>(IEntityMap<TEntity> mapper) where TEntity : class
 		{
 			if (!FluentMapper.EntityMaps.TryAdd(typeof(TEntity), mapper))
 			{
@@ -19,7 +19,7 @@ namespace FluentMapTxt
 		{
 			EntityMap<TEntity> mapper = new EntityMap<TEntity>();
 			mapper.PropertyMaps = ReflectionHelper.GetAttributeValue(type);
-			this.AddMap<TEntity>(mapper);
+			this.AddFromMap<TEntity>(mapper);
 		}
 
 		#region EditorBrowsableStates

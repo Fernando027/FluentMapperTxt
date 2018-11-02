@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FluentMapTxt.Tests.Models
+namespace fluentMapTxt.Tests.Models
 {
 	public class ArquivoModelo
 	{

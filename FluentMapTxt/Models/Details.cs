@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FluentMapTxt.Tests.Models
+namespace fluentMapTxt.Tests.Models
 {
 	public class Details
 	{

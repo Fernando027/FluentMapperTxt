@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CNAB240.BB.Model
+namespace fluentMapTxt.Model
 {
 	[AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
 	public class EscolhaAttribute : Attribute

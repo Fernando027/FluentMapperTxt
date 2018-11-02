@@ -1,5 +1,6 @@
 ﻿
-using FluentMapTxt;
+using fluentMapTxt;
+
 using System.Collections.Generic;
 /// <summary>
 /// Represents a typed mapping of an entity.

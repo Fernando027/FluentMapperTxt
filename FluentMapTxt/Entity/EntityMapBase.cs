@@ -1,5 +1,5 @@
-﻿using FluentMapTxt;
-using FluentMapTxt.Exceptions;
+﻿using fluentMapTxt;
+using fluentMapTxt.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

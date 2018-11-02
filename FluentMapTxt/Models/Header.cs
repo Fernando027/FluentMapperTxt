@@ -1,4 +1,4 @@
-﻿namespace FluentMapTxt.Tests.Models
+﻿namespace fluentMapTxt.Tests.Models
 {
 	public class Header
 	{
